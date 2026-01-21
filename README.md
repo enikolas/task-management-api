@@ -81,16 +81,33 @@ All issues are tracked publicly and can be accessed [here](https://github.com/en
 
 ### Prerequisites
 
-- Java 25 (LTS)
+- **Optional:** Java 25 (LTS) – only needed if running the application locally
 - Docker & Docker Compose
 - Git
 
-### Local Setup
+### Running with Docker
+
+Run the entire application stack (PostgreSQL + pgAdmin + API) with a single command:
+
+```bash     
+# UNIX / macOS
+./run.sh
+
+# Windows
+./run
+```
+
+### Running locally with Java
+
+If you prefer running the application with your local JDK:
 
 ```bash
 # Clone the repository
 git clone https://github.com/enikolas/task-management-api.git
 cd task-management-api
+
+# Run PostgreSQL and pgAdmin
+docker compose up -d
 
 # Build the project
 ./gradlew clean build
@@ -99,7 +116,9 @@ cd task-management-api
 ./gradlew bootRun
 ```
 
-Swagger UI will be available at http://localhost:8080/swagger-ui.html.
+### Swagger UI
+
+Once the application is running, you can access the Swagger UI at http://localhost:8080/swagger-ui.html.
 
 ## Contributing
 

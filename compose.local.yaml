@@ -1,0 +1,14 @@
+services:
+  application:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      TASK_MANAGEMENT_DB_HOST: database
+      TASK_MANAGEMENT_DB_PORT: 5432
+      TASK_MANAGEMENT_DB_NAME: task-management-db
+      TASK_MANAGEMENT_DB_USER: task-management-db-user
+      TASK_MANAGEMENT_DB_PASS: task-management-db-pass
+    depends_on:
+      - database
