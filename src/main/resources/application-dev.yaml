@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/task-management-db
+    username: task-management-db-user
+    password: task-management-db-pass

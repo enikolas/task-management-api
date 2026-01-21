@@ -1,0 +1,19 @@
+services:
+  database:
+    image: postgres:18.1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: task-management-db
+      POSTGRES_USER: task-management-db-user
+      POSTGRES_PASSWORD: task-management-db-pass
+
+  pgadmin:
+    image: dpage/pgadmin4:9.11
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin-pass
+    ports:
+      - "8090:80"
+    depends_on:
+      - database
