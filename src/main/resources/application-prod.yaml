@@ -3,3 +3,8 @@ spring:
     url: jdbc:postgresql://${TASK_MANAGEMENT_DB_HOST}:${TASK_MANAGEMENT_DB_PORT}/${TASK_MANAGEMENT_DB_NAME}
     username: ${TASK_MANAGEMENT_DB_USER}
     password: ${TASK_MANAGEMENT_DB_PASS}
+
+management:
+  endpoint:
+    health:
+      show-details: never
