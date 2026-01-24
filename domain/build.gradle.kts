@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
     testRuntimeOnly(libs.junitPlatformLauncher)
 }
 
