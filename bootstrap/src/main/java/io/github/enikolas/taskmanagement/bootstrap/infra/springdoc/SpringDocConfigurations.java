@@ -1,4 +1,4 @@
-package io.github.enikolas.taskmanagement.infra.springdoc;
+package io.github.enikolas.taskmanagement.bootstrap.infra.springdoc;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
