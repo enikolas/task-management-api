@@ -1,30 +1,10 @@
 [versions]
 appVersion = "0.1.0-SNAPSHOT"
 lombok = "1.18.42"
-springBoot = "4.0.1"
-springDependencyManagement = "1.1.7"
+junit = "6.0.1"
 springdoc = "3.0.1"
 
 [libraries]
-flywayPostgresql = { group = "org.flywaydb", name = "flyway-database-postgresql" }
-junitPlatformLauncher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+junitPlatformLauncher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
-postgreSql = { group = "org.postgresql", name = "postgresql" }
-springBootActuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
-springBootActuatorTest = { group = "org.springframework.boot", name = "spring-boot-starter-actuator-test" }
-springBootDataJpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
-springBootDataJpaTest = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa-test" }
-springBootFlyway = { group = "org.springframework.boot", name = "spring-boot-starter-flyway" }
-springBootFlywayTest = { group = "org.springframework.boot", name = "spring-boot-starter-flyway-test" }
-springBootStartTest = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
-springBootTestContainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
-springBootWeb = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc" }
-springBootWebTest = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc-test" }
-testContainersJunit = { group = "org.testcontainers", name = "testcontainers-junit-jupiter" }
-testContainersPostgreSql = { group = "org.testcontainers", name = "testcontainers-postgresql" }
-
 springdoc = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
-
-[plugins]
-springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
-springDependencyManagement = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }

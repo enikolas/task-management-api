@@ -20,6 +20,6 @@ WORKDIR /app
 ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 8080
 
-COPY --from=builder /opt/task-management-api/bootstrap/build/libs/bootstrap-*.jar task-management-api.jar
+COPY --from=builder /opt/task-management-api/infrastructure/build/libs/infrastructure-*.jar task-management-api.jar
 
 ENTRYPOINT ["java", "-jar", "task-management-api.jar"]
