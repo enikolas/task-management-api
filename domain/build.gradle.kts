@@ -18,6 +18,10 @@ repositories {
 dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
+
+    testImplementation(libs.junitJupiterApi)
+    testImplementation(libs.junitJupiterParams)
+    testRuntimeOnly(libs.junitJupiterEngine)
     testRuntimeOnly(libs.junitPlatformLauncher)
 }
 
