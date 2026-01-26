@@ -1,5 +1,6 @@
 plugins {
     java
+    idea
     id("org.springframework.boot") version "4.0.2"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -18,6 +19,22 @@ java {
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+
+val integrationTest by sourceSets.creating
+
+val integrationTestImplementation by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+}
+val integrationTestRuntimeOnly by configurations.getting
+
+configurations["integrationTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
+
+idea {
+    module {
+        testSources.from(sourceSets["integrationTest"].java.srcDirs)
     }
 }
 
@@ -44,19 +61,44 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor(libs.lombok)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
-
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.testcontainers:testcontainers-junit-jupiter")
-    testImplementation("org.testcontainers:testcontainers-postgresql")
-
+    testImplementation(libs.junitJupiterApi)
+    testImplementation(libs.junitJupiterParams)
+    testRuntimeOnly(libs.junitJupiterEngine)
     testRuntimeOnly(libs.junitPlatformLauncher)
+
+    integrationTestImplementation(project(":infrastructure"))
+    integrationTestImplementation(libs.assertJ)
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-validation-test")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+
+    integrationTestImplementation("org.springframework.boot:spring-boot-testcontainers")
+    integrationTestImplementation("org.testcontainers:testcontainers-junit-jupiter")
+    integrationTestImplementation("org.testcontainers:testcontainers-postgresql")
+
+    integrationTestImplementation(libs.junitJupiterApi)
+    integrationTestImplementation(libs.junitJupiterParams)
+    integrationTestRuntimeOnly(libs.junitJupiterEngine)
+    integrationTestRuntimeOnly(libs.junitPlatformLauncher)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.register<Test>("integrationTest") {
+    description = "Runs integration tests"
+    group = "verification"
+
+    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+    classpath = sourceSets["integrationTest"].runtimeClasspath
+    shouldRunAfter("test")
+
+    useJUnitPlatform()
+}
+
+tasks.check {
+    dependsOn("integrationTest")
 }

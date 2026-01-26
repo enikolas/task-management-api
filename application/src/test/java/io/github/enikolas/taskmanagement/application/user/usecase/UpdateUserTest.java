@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -134,7 +134,7 @@ class UpdateUserTest {
 
         var output = updateUser.updateUser(input);
 
-        assertEquals(updated, output);
+        assertThat(output).isEqualTo(updated);
 
         verify(userRepository).update(updated);
     }
@@ -167,7 +167,7 @@ class UpdateUserTest {
 
         var output = updateUser.updateUser(input);
 
-        assertEquals(updated, output);
+        assertThat(output).isEqualTo(updated);
 
         verify(userRepository).update(updated);
     }
@@ -202,7 +202,7 @@ class UpdateUserTest {
 
         var output = updateUser.updateUser(input);
 
-        assertEquals(updated, output);
+        assertThat(output).isEqualTo(updated);
 
         verify(passwordEncoder).encode(newPassword);
         verify(userRepository).update(updated);
@@ -240,7 +240,7 @@ class UpdateUserTest {
 
         var output = updateUser.updateUser(input);
 
-        assertEquals(updated, output);
+        assertThat(output).isEqualTo(updated);
 
         verify(passwordEncoder).encode(newPassword);
         verify(userRepository).update(updated);

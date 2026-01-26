@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -80,14 +80,14 @@ class CreateUserTest {
 
         var output = createUser.createUser(input);
 
-        assertEquals(dummyOutput, output);
+        assertThat(output).isEqualTo(dummyOutput);
 
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).create(captor.capture());
 
         User saved = captor.getValue();
-        assertEquals(input.fullName(), saved.getFullName());
-        assertEquals(input.email(), saved.getEmail());
-        assertEquals(passwordHash, saved.getPasswordHash());
+        assertThat(saved.getFullName()).isEqualTo(input.fullName());
+        assertThat(saved.getEmail()).isEqualTo(input.email());
+        assertThat(saved.getPasswordHash()).isEqualTo(passwordHash);
     }
 }

@@ -18,6 +18,7 @@ repositories {
 dependencies {
     implementation(project(":domain"))
 
+    testImplementation(libs.assertJ)
     testImplementation(libs.junitJupiterApi)
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockitoJunitJupiter)
