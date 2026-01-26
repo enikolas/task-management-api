@@ -1,7 +1,8 @@
 [versions]
 appVersion = "0.1.0-SNAPSHOT"
-lombok = "1.18.42"
 junit = "6.0.2"
+lombok = "1.18.42"
+mockito = "5.21.0"
 springdoc = "3.0.1"
 
 [libraries]
@@ -10,4 +11,5 @@ junitJupiterEngine = { group = "org.junit.jupiter", name = "junit-jupiter-engine
 junitJupiterParams = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit" }
 junitPlatformLauncher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+mockitoJunitJupiter = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mockito" }
 springdoc = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }

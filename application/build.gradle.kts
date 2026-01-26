@@ -17,8 +17,11 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
-    compileOnly(libs.lombok)
-    annotationProcessor(libs.lombok)
+
+    testImplementation(libs.junitJupiterApi)
+    testImplementation(libs.junitJupiterParams)
+    testImplementation(libs.mockitoJunitJupiter)
+    testRuntimeOnly(libs.junitJupiterEngine)
     testRuntimeOnly(libs.junitPlatformLauncher)
 }
 
