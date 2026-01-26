@@ -19,6 +19,7 @@ dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
 
+    testImplementation(libs.assertJ)
     testImplementation(libs.junitJupiterApi)
     testImplementation(libs.junitJupiterParams)
     testRuntimeOnly(libs.junitJupiterEngine)

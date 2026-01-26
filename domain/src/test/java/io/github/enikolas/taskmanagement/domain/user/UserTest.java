@@ -3,7 +3,7 @@ package io.github.enikolas.taskmanagement.domain.user;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class UserTest {
     @Test
@@ -15,7 +15,7 @@ class UserTest {
                 new PasswordHash("hashed:123456789")
         );
 
-        assertNotNull(user.getId());
-        assertNotNull(user.getId().value());
+        assertThat(user.getId()).isNotNull();
+        assertThat(user.getId().value()).isNotNull();
     }
 }

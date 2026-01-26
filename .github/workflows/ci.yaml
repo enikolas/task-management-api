@@ -26,8 +26,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
 
-      - name: Build and run tests
-        run: ./gradlew build
+      - name: Run Unit Tests
+        run: ./gradlew test
+
+      - name: Run Integration Tests
+        run: ./gradlew integrationTest
 
       - name: Build Docker image
         run: ./build.sh ci
