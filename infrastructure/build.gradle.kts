@@ -61,8 +61,10 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor(libs.lombok)
 
+    testImplementation(libs.assertJ)
     testImplementation(libs.junitJupiterApi)
     testImplementation(libs.junitJupiterParams)
+    testImplementation(libs.mockitoJunitJupiter)
     testRuntimeOnly(libs.junitJupiterEngine)
     testRuntimeOnly(libs.junitPlatformLauncher)
 
