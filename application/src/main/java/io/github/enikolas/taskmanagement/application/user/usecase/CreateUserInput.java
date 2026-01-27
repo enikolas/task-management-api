@@ -7,4 +7,10 @@ public record CreateUserInput(
         Email email,
         PlainTextPassword plainTextPassword
 ) {
+    public CreateUserInput(String fullName, String email, String password) {
+        this(fullName,
+                new Email(email),
+                new PlainTextPassword(password)
+        );
+    }
 }

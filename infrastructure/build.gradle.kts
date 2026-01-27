@@ -65,6 +65,8 @@ dependencies {
     testImplementation(libs.junitJupiterApi)
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockitoJunitJupiter)
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+
     testRuntimeOnly(libs.junitJupiterEngine)
     testRuntimeOnly(libs.junitPlatformLauncher)
 
