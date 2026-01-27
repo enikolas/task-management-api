@@ -13,7 +13,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 class TaskManagementApiApplicationTests {
 
     @Container
-    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18.1");
+    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18.1");
 
     @DynamicPropertySource
     static void overrideProps(DynamicPropertyRegistry registry) {

@@ -1,4 +1,4 @@
-package io.github.enikolas.taskmanagement.application.user.usecase;
+package io.github.enikolas.taskmanagement.application.user.exception;
 
 import io.github.enikolas.taskmanagement.application.error.ApplicationException;
 import io.github.enikolas.taskmanagement.application.error.ErrorCode;

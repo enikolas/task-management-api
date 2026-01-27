@@ -31,7 +31,7 @@ Adopt a **partial Clean Architecture**:
 
 #### Rationale
 
-A fully purist Clean Architecture maximises theoretical replaceability
+A full purist Clean Architecture maximises theoretical replaceability
 (databases, frameworks, transports),
 but introduces significant delivery cost:
 
