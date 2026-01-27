@@ -1,6 +1,7 @@
 package io.github.enikolas.taskmanagement.application.user.usecase;
 
 import io.github.enikolas.taskmanagement.application.security.port.PasswordEncoderPort;
+import io.github.enikolas.taskmanagement.application.user.exception.UserDuplicatedException;
 import io.github.enikolas.taskmanagement.application.user.port.UserRepositoryPort;
 import io.github.enikolas.taskmanagement.domain.user.Email;
 import io.github.enikolas.taskmanagement.domain.user.PasswordHash;

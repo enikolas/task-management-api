@@ -24,7 +24,7 @@ class UserJpaRepositoryTest {
     private UserJpaRepository repository;
 
     @Container
-    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18.1");
+    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18.1");
 
     @DynamicPropertySource
     static void overrideProps(DynamicPropertyRegistry registry) {
@@ -56,7 +56,7 @@ class UserJpaRepositoryTest {
 
     @Test
     @DisplayName("given an existing user, when updating, then updatedAt is updated but createdAt remains unchanged")
-    void givenExistingUser_whenUpdate_thenUpdatedAtChanges() throws InterruptedException {
+    void givenExistingUser_whenUpdate_thenUpdatedAtChanges() {
         var user = repository.save(UserJpaEntity.builder()
                 .fullName("Update Test")
                 .email("update@email.com")

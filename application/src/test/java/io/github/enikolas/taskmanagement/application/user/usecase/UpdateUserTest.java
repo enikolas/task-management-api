@@ -1,6 +1,8 @@
 package io.github.enikolas.taskmanagement.application.user.usecase;
 
 import io.github.enikolas.taskmanagement.application.security.port.PasswordEncoderPort;
+import io.github.enikolas.taskmanagement.application.user.exception.UserNotFoundException;
+import io.github.enikolas.taskmanagement.application.user.exception.UserUpdateInvalidArgumentException;
 import io.github.enikolas.taskmanagement.application.user.port.UserRepositoryPort;
 import io.github.enikolas.taskmanagement.domain.user.Email;
 import io.github.enikolas.taskmanagement.domain.user.PasswordHash;
@@ -53,11 +55,6 @@ class UpdateUserTest {
     @DisplayName("given a null input, when updating user, then throws an exception")
     void givenNullInput_whenUpdateUser_thenThrowException() {
         var userId = UserId.newId();
-
-        var user = new User(userId,
-                "John Doe",
-                new Email("john.doe@email.com"),
-                new PasswordHash("123"));
 
         var input = new UpdateUserInput(
                 userId,
