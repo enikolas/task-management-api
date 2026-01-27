@@ -55,6 +55,7 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation(libs.springdoc)
 
+    implementation(libs.auth0Jwt)
     implementation("org.mindrot:jbcrypt:0.4")
 
     compileOnly(libs.lombok)

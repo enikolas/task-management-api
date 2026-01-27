@@ -23,6 +23,9 @@ public class ExceptionMapper {
             case INVALID_ARGUMENT -> {
                 return ResponseEntity.badRequest().body(exception.getMessage());
             }
+            case AUTHENTICATION_INVALID -> {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
+            }
             default -> {
                 return ResponseEntity.internalServerError().body(exception.getMessage());
             }

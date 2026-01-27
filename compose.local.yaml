@@ -10,5 +10,7 @@ services:
       TASK_MANAGEMENT_DB_NAME: task-management-db
       TASK_MANAGEMENT_DB_USER: task-management-db-user
       TASK_MANAGEMENT_DB_PASS: task-management-db-pass
+      TASK_MANAGEMENT_JWT_SECRET: task-management-local-docker-jwt-secret-key
+      TASK_MANAGEMENT_JWT_DURATION: P1D
     depends_on:
       - database

@@ -8,3 +8,9 @@ management:
   endpoint:
     health:
       show-details: never
+
+task-management-api:
+  security:
+    jwt-token:
+      secret: ${TASK_MANAGEMENT_JWT_SECRET}
+      duration: ${TASK_MANAGEMENT_JWT_DURATION}
