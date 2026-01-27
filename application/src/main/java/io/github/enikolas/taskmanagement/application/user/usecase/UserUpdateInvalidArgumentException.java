@@ -1,6 +1,7 @@
 package io.github.enikolas.taskmanagement.application.user.usecase;
 
-import io.github.enikolas.taskmanagement.application.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ErrorCode;
 
 public class UserUpdateInvalidArgumentException extends ApplicationException {
     public UserUpdateInvalidArgumentException(String message) {
@@ -8,7 +9,7 @@ public class UserUpdateInvalidArgumentException extends ApplicationException {
     }
 
     @Override
-    public String code() {
-        return "INVALID_ARGUMENT";
+    public ErrorCode code() {
+        return ErrorCode.INVALID_ARGUMENT;
     }
 }

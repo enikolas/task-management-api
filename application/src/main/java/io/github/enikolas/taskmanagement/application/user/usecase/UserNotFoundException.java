@@ -1,6 +1,7 @@
 package io.github.enikolas.taskmanagement.application.user.usecase;
 
-import io.github.enikolas.taskmanagement.application.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ErrorCode;
 import io.github.enikolas.taskmanagement.domain.user.UserId;
 
 public class UserNotFoundException extends ApplicationException {
@@ -9,7 +10,7 @@ public class UserNotFoundException extends ApplicationException {
     }
 
     @Override
-    public String code() {
-        return "NOT_FOUND";
+    public ErrorCode code() {
+        return ErrorCode.NOT_FOUND;
     }
 }
