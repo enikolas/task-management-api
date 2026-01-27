@@ -1,6 +1,7 @@
 package io.github.enikolas.taskmanagement.application.user.usecase;
 
-import io.github.enikolas.taskmanagement.application.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ApplicationException;
+import io.github.enikolas.taskmanagement.application.error.ErrorCode;
 import io.github.enikolas.taskmanagement.domain.user.Email;
 
 public class UserDuplicatedException extends ApplicationException {
@@ -9,7 +10,7 @@ public class UserDuplicatedException extends ApplicationException {
     }
 
     @Override
-    public String code() {
-        return "DUPLICATED";
+    public ErrorCode code() {
+        return ErrorCode.DUPLICATED;
     }
 }
