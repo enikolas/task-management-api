@@ -38,8 +38,4 @@ public class UserJpaEntity {
     @Embedded
     @Builder.Default
     private AuditableFields audit = AuditableFields.builder().build();
-
-    public boolean isActive() {
-        return deletedAt == null;
-    }
 }

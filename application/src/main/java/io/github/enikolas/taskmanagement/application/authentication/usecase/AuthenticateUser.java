@@ -1,5 +1,6 @@
 package io.github.enikolas.taskmanagement.application.authentication.usecase;
 
+import io.github.enikolas.taskmanagement.application.authentication.AuthToken;
 import io.github.enikolas.taskmanagement.application.authentication.exception.AuthTokenGenerationException;
 import io.github.enikolas.taskmanagement.application.authentication.exception.InvalidAuthenticationException;
 import io.github.enikolas.taskmanagement.application.authentication.port.AuthTokenRepositoryPort;
@@ -42,14 +43,16 @@ public class AuthenticateUser {
             throw new InvalidAuthenticationException();
         }
 
-        var authToken = authTokenRepository.generateToken(user.getEmail(),
+        var accessToken = authTokenRepository.generateAccessToken(user.getEmail(),
                 getExpiresAt());
 
-        if (authToken.isEmpty()) {
+        var refreshToken = authTokenRepository.generateRefreshToken(user.getId(), getExpiresAt());
+
+        if (accessToken.isEmpty() || refreshToken.isEmpty()) {
             throw new AuthTokenGenerationException();
         }
 
-        return authToken.get();
+        return new AuthToken(accessToken.get(), refreshToken.get());
     }
 
     private Instant getExpiresAt() {

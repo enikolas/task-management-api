@@ -1,5 +1,8 @@
 package io.github.enikolas.taskmanagement.application.authentication.usecase;
 
+import io.github.enikolas.taskmanagement.application.authentication.AccessToken;
+import io.github.enikolas.taskmanagement.application.authentication.AuthToken;
+import io.github.enikolas.taskmanagement.application.authentication.RefreshToken;
 import io.github.enikolas.taskmanagement.application.authentication.exception.AuthTokenGenerationException;
 import io.github.enikolas.taskmanagement.application.authentication.exception.InvalidAuthenticationException;
 import io.github.enikolas.taskmanagement.application.authentication.port.AuthTokenRepositoryPort;
@@ -121,7 +124,7 @@ class AuthenticateUserTest {
         when(passwordChecker.check(input.plainTextPassword(), user.getPasswordHash()))
                 .thenReturn(true);
 
-        when(authTokenRepository.generateToken(any(), any()))
+        when(authTokenRepository.generateAccessToken(any(), any()))
                 .thenReturn(Optional.empty());
 
         assertThrows(AuthTokenGenerationException.class,
@@ -145,7 +148,9 @@ class AuthenticateUserTest {
                 new PlainTextPassword("mary-doe-password")
         );
 
-        var token = new AuthToken("jwt-token");
+        var accessToken = new AccessToken("my-access-token");
+        var refreshToken = new RefreshToken("my-refresh-token");
+        var token = new AuthToken(accessToken, refreshToken);
 
         when(userRepository.findByEmail(email))
                 .thenReturn(Optional.of(user));
@@ -153,8 +158,11 @@ class AuthenticateUserTest {
         when(passwordChecker.check(input.plainTextPassword(), user.getPasswordHash()))
                 .thenReturn(true);
 
-        when(authTokenRepository.generateToken(any(), any()))
-                .thenReturn(Optional.of(token));
+        when(authTokenRepository.generateAccessToken(any(), any()))
+                .thenReturn(Optional.of(accessToken));
+
+        when(authTokenRepository.generateRefreshToken(any(), any()))
+                .thenReturn(Optional.of(refreshToken));
 
         final Instant minExpiresAt = Instant.now().plus(tokenDuration);
 
@@ -165,7 +173,7 @@ class AuthenticateUserTest {
         assertThat(output).isEqualTo(token);
 
         ArgumentCaptor<Instant> instantCaptor = ArgumentCaptor.forClass(Instant.class);
-        verify(authTokenRepository).generateToken(eq(email), instantCaptor.capture());
+        verify(authTokenRepository).generateAccessToken(eq(email), instantCaptor.capture());
 
         Instant expiresAt = instantCaptor.getValue();
         assertThat(expiresAt)

@@ -49,6 +49,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-flyway")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
 
@@ -56,7 +57,6 @@ dependencies {
     implementation(libs.springdoc)
 
     implementation(libs.auth0Jwt)
-    implementation("org.mindrot:jbcrypt:0.4")
 
     compileOnly(libs.lombok)
     runtimeOnly("org.postgresql:postgresql")
@@ -76,6 +76,7 @@ dependencies {
     integrationTestImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
     integrationTestImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     integrationTestImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-security-test")
     integrationTestImplementation("org.springframework.boot:spring-boot-starter-validation-test")
     integrationTestImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 
