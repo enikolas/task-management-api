@@ -39,44 +39,6 @@ security, testing, and observability.
 
 ---
 
-## Project Setup
-
-This milestone establishes the **foundation of the project**, providing the basic structure and infrastructure needed for subsequent development:
-
-- Initial Spring Boot skeleton with Gradle build
-- Docker & Docker Compose for local development
-- CI/CD pipeline with quality gates for PRs
-- Swagger documentation setup for future endpoints
-- Application metrics and health checks via Spring Actuator
-
-Subsequent milestones will build on this foundation to implement business functionality,
-security features, and complete API endpoints for boards, lists, and cards.
-
----
-
-## Roadmap & Milestones
-
-Milestones are tracked using **GitHub Milestones** and Issues:
-
-- **v0.0.1 – Project Setup (foundation)**  
-  Initial project skeleton, CI/CD pipeline, Swagger, metrics, Docker.
-
-- **v0.1.0 – Authentication & Users**  
-  User registration, login, JWT authentication, and secured endpoints.
-
-- **v0.2.0 – Boards**  
-  Create and list boards, share boards between users.
-
-- **v0.3.0 – Lists**  
-  Manage lists within boards.
-
-- **v0.4.0 – Cards**  
-  CRUD operations for cards, move between lists, assign users.
-
-All issues are tracked publicly and can be accessed [here](https://github.com/enikolas/task-management-api/issues).
-
----
-
 ## Getting Started
 
 ### Prerequisites
@@ -102,10 +64,6 @@ Run the entire application stack (PostgreSQL + pgAdmin + API) with a single comm
 If you prefer running the application with your local JDK:
 
 ```bash
-# Clone the repository
-git clone https://github.com/enikolas/task-management-api.git
-cd task-management-api
-
 # Run PostgreSQL and pgAdmin
 docker compose up -d
 
@@ -124,12 +82,7 @@ Once the application is running, you can access the Swagger UI at http://localho
 
 - Develop features in feature branches named after the issue, e.g., feature/user-registration.
 - PRs should merge into main only after passing CI/CD quality gates.
-- Follow **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** for commit messages:
-    ```
-    feat(user): implement registration endpoint
-    fix(auth): correct JWT token validation
-    docs(readme): update setup instructions
-    ```
+- Follow **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** for commit messages.
 
 ## License
 

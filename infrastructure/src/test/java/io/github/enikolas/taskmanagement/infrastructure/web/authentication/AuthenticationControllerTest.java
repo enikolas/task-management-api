@@ -2,8 +2,10 @@ package io.github.enikolas.taskmanagement.infrastructure.web.authentication;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.enikolas.taskmanagement.application.authentication.AccessToken;
+import io.github.enikolas.taskmanagement.application.authentication.AuthToken;
+import io.github.enikolas.taskmanagement.application.authentication.RefreshToken;
 import io.github.enikolas.taskmanagement.application.authentication.exception.InvalidAuthenticationException;
-import io.github.enikolas.taskmanagement.application.authentication.usecase.AuthToken;
 import io.github.enikolas.taskmanagement.application.authentication.usecase.AuthenticateUser;
 import io.github.enikolas.taskmanagement.infrastructure.web.exception.ExceptionMapper;
 import io.github.enikolas.taskmanagement.infrastructure.web.exception.ValidationErrorResponse;
@@ -36,19 +38,19 @@ class AuthenticationControllerTest {
     private AuthenticateUser authenticateUser;
 
     @Test
-    @DisplayName("given no payload, when signing in, then return 400 BAD_REQUEST")
-    void givenNoPayload_whenPost_thenReturn400() throws Exception {
-        var response = mvc.perform(post("/signin"))
+    @DisplayName("given no payload, when logging in, then return 400 BAD_REQUEST")
+    void givenNoPayload_whenLogin_thenReturn400() throws Exception {
+        var response = mvc.perform(post("/auth/login"))
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(400);
     }
 
     @Test
-    @DisplayName("given empty payload, when signing in, then return validation errors")
-    void givenEmptyPayload_whenPost_thenReturnValidationErrors() throws Exception {
+    @DisplayName("given empty payload, when logging in, then return validation errors")
+    void givenEmptyPayload_whenLogin_thenReturnValidationErrors() throws Exception {
         var response = mvc.perform(
-                post("/signin")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}")
         ).andReturn().getResponse();
@@ -66,8 +68,8 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    @DisplayName("given invalid credentials, when signing in, then return 401 UNAUTHORIZED")
-    void givenInvalidCredentials_whenPost_thenReturn401() throws Exception {
+    @DisplayName("given invalid credentials, when logging in, then return 401 UNAUTHORIZED")
+    void givenInvalidCredentials_whenLogin_thenReturn401() throws Exception {
         when(authenticateUser.authenticateUser(any()))
                 .thenThrow(new InvalidAuthenticationException());
 
@@ -76,7 +78,7 @@ class AuthenticationControllerTest {
         );
 
         var response = mvc.perform(
-                post("/signin")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload)
         ).andReturn().getResponse();
@@ -85,9 +87,12 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    @DisplayName("given valid credentials, when signing in, then return 200 OK with token")
-    void givenValidCredentials_whenPost_thenReturn200() throws Exception {
-        var token = new AuthToken("jwt-token");
+    @DisplayName("given valid credentials, when logging in, then return 200 OK with accessToken")
+    void givenValidCredentials_whenLogin_thenReturn200() throws Exception {
+        var accessToken = new AccessToken("jwt-access-token");
+        var refreshToken = new RefreshToken("jwt-refresh-token");
+
+        var token = new AuthToken(accessToken, refreshToken);
 
         when(authenticateUser.authenticateUser(any()))
                 .thenReturn(token);
@@ -97,7 +102,7 @@ class AuthenticationControllerTest {
         );
 
         var response = mvc.perform(
-                post("/signin")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload)
         ).andReturn().getResponse();
@@ -108,6 +113,7 @@ class AuthenticationControllerTest {
         );
 
         assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(output.token()).isEqualTo(token.value());
+        assertThat(output.accessToken()).isEqualTo(accessToken.value());
+        assertThat(output.refreshToken()).isEqualTo(refreshToken.value());
     }
 }
